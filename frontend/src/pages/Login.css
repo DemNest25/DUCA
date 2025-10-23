@@ -19,7 +19,6 @@
   padding: 2.2rem 2rem 2rem;
   text-align: center;
 
-  /* “soft card” cálida */
   background: #FAF6F4;
   border: 1px solid rgba(205,156,138,0.45);
   border-radius: 18px;
@@ -30,7 +29,7 @@
   color: #432C24;
 }
 
-/* Cinta superior naranja (solo decorativa, no requiere HTML extra) */
+/* Cinta superior naranja */
 .login-card::before {
   content: "";
   position: absolute;
@@ -85,16 +84,9 @@
   filter: brightness(1.03);
 }
 
-/* =================== ACCESORIOS =================== */
+/* =================== COLORES BASE =================== */
 :root {
   --color-beige: #CD9C8A;
   --color-naranja: #FF5100;
   --color-blanco: #FFFFFF;
 }
-
-/* (Opcional) si tu navbar deja una franja arriba en /login, puedes ocultarlo solo aquí */
-/*
-.navbar, header[role="banner"] {
-  display: none !important;
-}
-*/

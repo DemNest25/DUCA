@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/client';
-import fondo from '../assets/img/fondo-equipo.png'; // <-- importa la imagen desde assets
 import './Login.css';
 
 export default function Login() {
@@ -30,8 +29,7 @@ export default function Login() {
   }
 
   return (
-    // Pasamos la imagen como variable CSS para usarla en ::before
-    <div className="login-bg" style={{ '--bg-image': `url(${fondo})` }}>
+    <div className="login-bg">
       <div className="login-card">
         <h3 className="text-white mb-3">Bienvenido</h3>
         {msg && <div className="alert alert-danger">{msg}</div>}
