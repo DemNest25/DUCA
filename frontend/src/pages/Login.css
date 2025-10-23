@@ -5,63 +5,94 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* oculta el pseudo-elemento */
+  overflow: hidden;
+  isolation: isolate;          /* asegura capas correctas */
+  background: #CD9C8A;         /* fallback beige */
 }
 
-/* ===== Capa de fondo animada con imagen y degradado ===== */
+/* ===== Capa de fondo con imagen + degradado ===== */
 .login-bg::before {
   content: "";
   position: absolute;
   top: 0; right: 0; bottom: 0; left: 0;
+  /* Usamos la variable --bg-image que viene desde el componente */
   background:
-    linear-gradient(180deg, rgba(255,81,0,0.55), rgba(205,156,138,0.85)),
-    url("assets/img/fondo-equipo.png") center/cover no-repeat;
-  filter: blur(2px);
+    linear-gradient(180deg, rgba(255,81,0,0.25), rgba(205,156,138,0.35)),
+    var(--bg-image) center/cover no-repeat;
+  filter: blur(1.5px);
   animation: bgMove 12s ease-in-out infinite alternate;
-  z-index: 0;
+  z-index: -1;
 }
 
-/* ===== Tarjeta de login ===== */
-.login-card {
-  position: relative;
-  z-index: 1;
-  background: rgba(255,255,255,0.25);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: #fff;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
-  width: 340px;
-  text-align: center;
+/* Vignette suave para profundidad */
+.login-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(120% 80% at 50% 10%, rgba(0,0,0,0.0) 40%, rgba(0,0,0,0.25) 100%);
+  z-index: -1;
 }
 
-/* ===== Animación del fondo ===== */
+/* Animación del fondo */
 @keyframes bgMove {
   0%   { transform: scale(1.02) translateY(-1%); }
   100% { transform: scale(1.06) translateY(1%); }
 }
 
-/* ===== Botón de login ===== */
-.btn-login {
-  background: linear-gradient(90deg, #007bff, #0056b3);
-  border: none;
-  color: white;
-  font-weight: 500;
-  transition: 0.3s ease;
-}
-.btn-login:hover {
-  background: linear-gradient(90deg, #0056b3, #003d80);
-  transform: scale(1.02);
+/* =================== TARJETA (Estilo A - glass) =================== */
+.login-card {
+  position: relative;
+  z-index: 1;
+  width: 360px;
+  padding: 2rem;
+  text-align: center;
+
+  background: rgba(255,255,255,0.22);
+  border: 1px solid rgba(255,255,255,0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  color: #fff;
 }
 
-/* ===== Colores base ===== */
+.login-card h3 { color: #fff; }
+
+/* Inputs */
+.login-card .form-control {
+  background: rgba(17, 24, 39, 0.85);
+  color: #e5e7eb;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.login-card .form-control:focus {
+  outline: none;
+  border-color: #FF5100;
+  box-shadow: 0 0 0 3px rgba(255,81,0,0.25);
+}
+
+/* Botón */
+.btn-login {
+  background: linear-gradient(90deg, #FF5100, #CD9C8A);
+  border: none;
+  color: #FFFFFF;
+  font-weight: 600;
+  transition: transform .2s ease, filter .2s ease;
+}
+.btn-login:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+/* Colores base por si los necesitas en otros elementos */
 :root {
   --color-beige: #CD9C8A;
   --color-naranja: #FF5100;
   --color-blanco: #FFFFFF;
 }
 
-.login-card h1, .login-card label {
-  color: var(--color-blanco);
+/* (Opcional) Ocultar navbar/header si te pone la franja azul en /login */
+.navbar, header[role="banner"] {
+  display: none !important;
 }
