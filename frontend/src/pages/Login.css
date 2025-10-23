@@ -1,4 +1,4 @@
-/* Fondo y layout */
+/* =================== FONDO Y LAYOUT =================== */
 .login-bg {
   position: relative;
   height: 100vh;
@@ -6,40 +6,43 @@
   align-items: center;
   justify-content: center;
   overflow: hidden; /* oculta el pseudo-elemento */
-  /* ya sin filter aquí */
 }
 
-/* Capa de fondo animada solamente detrás */
+/* ===== Capa de fondo animada con imagen y degradado ===== */
 .login-bg::before {
   content: "";
   position: absolute;
-  inset: -20%;
-  background: radial-gradient(circle at bottom, #007bff, #1e1e2f 80%);
-  background-size: cover;
-  filter: blur(2px);                /* aplica el blur solo al fondo */
+  top: 0; right: 0; bottom: 0; left: 0;
+  background:
+    linear-gradient(180deg, rgba(255,81,0,0.55), rgba(205,156,138,0.85)),
+    url("assets/img/fondo-equipo.png") center/cover no-repeat;
+  filter: blur(2px);
   animation: bgMove 12s ease-in-out infinite alternate;
   z-index: 0;
 }
 
-/* La tarjeta queda por encima, nítida */
+/* ===== Tarjeta de login ===== */
 .login-card {
   position: relative;
   z-index: 1;
-  background: rgba(40, 40, 50, 0.85);
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
   width: 340px;
-  backdrop-filter: blur(10px);      /* efecto glass solo sobre el fondo */
   text-align: center;
 }
 
+/* ===== Animación del fondo ===== */
 @keyframes bgMove {
   0%   { transform: scale(1.02) translateY(-1%); }
   100% { transform: scale(1.06) translateY(1%); }
 }
 
-/* Botón igual que antes */
+/* ===== Botón de login ===== */
 .btn-login {
   background: linear-gradient(90deg, #007bff, #0056b3);
   border: none;
@@ -50,4 +53,15 @@
 .btn-login:hover {
   background: linear-gradient(90deg, #0056b3, #003d80);
   transform: scale(1.02);
+}
+
+/* ===== Colores base ===== */
+:root {
+  --color-beige: #CD9C8A;
+  --color-naranja: #FF5100;
+  --color-blanco: #FFFFFF;
+}
+
+.login-card h1, .login-card label {
+  color: var(--color-blanco);
 }

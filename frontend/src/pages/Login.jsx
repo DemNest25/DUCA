@@ -13,7 +13,7 @@ export default function Login() {
     if (localStorage.getItem('token')) {
       navigate('/dashboard', { replace: true });
     }
-  }, []);
+  }, [navigate]);
 
   async function onSubmit(e) {
     e.preventDefault();
