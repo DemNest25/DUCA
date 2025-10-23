@@ -6,93 +6,95 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  isolation: isolate;          /* asegura capas correctas */
-  background: #CD9C8A;         /* fallback beige */
-}
-
-/* ===== Capa de fondo con imagen + degradado ===== */
-.login-bg::before {
-  content: "";
-  position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
-  /* Usamos la variable --bg-image que viene desde el componente */
   background:
-    linear-gradient(180deg, rgba(255,81,0,0.25), rgba(205,156,138,0.35)),
-    var(--bg-image) center/cover no-repeat;
-  filter: blur(1.5px);
-  animation: bgMove 12s ease-in-out infinite alternate;
-  z-index: -1;
+    radial-gradient(100% 70% at 50% 0%, #FFE9E1 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%),
+    linear-gradient(180deg, #CD9C8A 0%, #F2D6CB 45%, #FFFFFF 100%);
 }
 
-/* Vignette suave para profundidad */
-.login-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(120% 80% at 50% 10%, rgba(0,0,0,0.0) 40%, rgba(0,0,0,0.25) 100%);
-  z-index: -1;
-}
-
-/* Animación del fondo */
-@keyframes bgMove {
-  0%   { transform: scale(1.02) translateY(-1%); }
-  100% { transform: scale(1.06) translateY(1%); }
-}
-
-/* =================== TARJETA (Estilo A - glass) =================== */
+/* =================== TARJETA – NUEVO DISEÑO =================== */
 .login-card {
   position: relative;
   z-index: 1;
-  width: 360px;
-  padding: 2rem;
+  width: 380px;
+  padding: 2.2rem 2rem 2rem;
   text-align: center;
 
-  background: rgba(255,255,255,0.22);
-  border: 1px solid rgba(255,255,255,0.35);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* “soft card” cálida */
+  background: #FAF6F4;
+  border: 1px solid rgba(205,156,138,0.45);
+  border-radius: 18px;
+  box-shadow:
+    0 20px 50px rgba(205,156,138,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.9);
 
-  border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-  color: #fff;
+  color: #432C24;
 }
 
-.login-card h3 { color: #fff; }
+/* Cinta superior naranja (solo decorativa, no requiere HTML extra) */
+.login-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 8px;
+  border-radius: 18px 18px 0 0;
+  background: linear-gradient(90deg, #FF5100 0%, #FF7A33 100%);
+}
 
-/* Inputs */
+/* Título */
+.login-card h3 {
+  color: #432C24;
+  letter-spacing: .3px;
+  margin-bottom: 1rem;
+}
+
+/* =================== CAMPOS =================== */
+.login-card .form-label {
+  color: #6E4D41;
+  font-weight: 600;
+}
+
 .login-card .form-control {
-  background: rgba(17, 24, 39, 0.85);
-  color: #e5e7eb;
-  border: 1px solid rgba(255,255,255,0.1);
+  background: #FFFFFF;
+  color: #432C24;
+  border: 1px solid rgba(205,156,138,0.6);
+  border-radius: 12px;
+  transition: border-color .2s ease, box-shadow .2s ease;
 }
+
 .login-card .form-control:focus {
   outline: none;
   border-color: #FF5100;
-  box-shadow: 0 0 0 3px rgba(255,81,0,0.25);
+  box-shadow: 0 0 0 4px rgba(255,81,0,0.18);
 }
 
-/* Botón */
+/* =================== BOTÓN =================== */
 .btn-login {
-  background: linear-gradient(90deg, #FF5100, #CD9C8A);
+  background: linear-gradient(90deg, #FF5100, #FF7430);
   border: none;
   color: #FFFFFF;
-  font-weight: 600;
-  transition: transform .2s ease, filter .2s ease;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: .65rem 1rem;
+  letter-spacing: .2px;
+  box-shadow: 0 10px 18px rgba(255,81,0,0.24);
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
 }
 .btn-login:hover {
   transform: translateY(-1px);
-  filter: brightness(1.05);
+  box-shadow: 0 12px 22px rgba(255,81,0,0.30);
+  filter: brightness(1.03);
 }
 
-/* Colores base por si los necesitas en otros elementos */
+/* =================== ACCESORIOS =================== */
 :root {
   --color-beige: #CD9C8A;
   --color-naranja: #FF5100;
   --color-blanco: #FFFFFF;
 }
 
-/* (Opcional) Ocultar navbar/header si te pone la franja azul en /login */
+/* (Opcional) si tu navbar deja una franja arriba en /login, puedes ocultarlo solo aquí */
+/*
 .navbar, header[role="banner"] {
   display: none !important;
 }
+*/
