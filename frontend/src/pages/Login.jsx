@@ -13,7 +13,7 @@ export default function Login() {
     if (localStorage.getItem('token')) {
       navigate('/dashboard', { replace: true });
     }
-  }, []);
+  }, [navigate]);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -31,11 +31,11 @@ export default function Login() {
   return (
     <div className="login-bg">
       <div className="login-card">
-        <h3 className="text-white mb-3">Bienvenido</h3>
+        <h3 className="mb-3">SIGLAD</h3> {/* Cambié el texto aquí */}
         {msg && <div className="alert alert-danger">{msg}</div>}
         <form onSubmit={onSubmit}>
           <div className="mb-3">
-            <label className="form-label text-white">Correo</label>
+            <label className="form-label">Usuario</label>
             <input
               className="form-control"
               type="email"
@@ -45,7 +45,7 @@ export default function Login() {
             />
           </div>
           <div className="mb-3">
-            <label className="form-label text-white">Contraseña</label>
+            <label className="form-label">Password</label>
             <input
               className="form-control"
               type="password"
@@ -55,7 +55,7 @@ export default function Login() {
             />
           </div>
           <button className="btn btn-login w-100" type="submit">
-            Ingresar
+            Entrar
           </button>
         </form>
       </div>

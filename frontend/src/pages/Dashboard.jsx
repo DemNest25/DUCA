@@ -9,23 +9,25 @@ function Filters({
   fechaDesde, setFechaDesde,
   fechaHasta, setFechaHasta,
   onClear
-}){
+}) {
   return (
     <div className="row g-2 mb-3">
-      <div className="col-md-3">
+      {/* Filtro: Buscar por número o tipo */}
+      <div className="col-md-12">
         <input
           className="form-control"
           placeholder="Buscar por número o tipo..."
           value={q}
-          onChange={e=>setQ(e.target.value)}
+          onChange={e => setQ(e.target.value)}
         />
       </div>
 
-      <div className="col-md-3">
+      {/* Filtro: Todos los estados */}
+      <div className="col-md-12">
         <select
           className="form-select"
           value={estado}
-          onChange={e=>setEstado(e.target.value)}
+          onChange={e => setEstado(e.target.value)}
         >
           <option value="">Todos los estados</option>
           <option value="PENDIENTE">PENDIENTE</option>
@@ -34,25 +36,27 @@ function Filters({
         </select>
       </div>
 
-      <div className="col-md-2">
+      {/* Filtros de fecha */}
+      <div className="col-md-6">
         <input
           type="date"
           className="form-control"
           value={fechaDesde}
-          onChange={e=>setFechaDesde(e.target.value)}
+          onChange={e => setFechaDesde(e.target.value)}
         />
       </div>
 
-      <div className="col-md-2">
+      <div className="col-md-6">
         <input
           type="date"
           className="form-control"
           value={fechaHasta}
-          onChange={e=>setFechaHasta(e.target.value)}
+          onChange={e => setFechaHasta(e.target.value)}
         />
       </div>
 
-      <div className="col-md-2">
+      {/* Botón Limpiar */}
+      <div className="col-md-12">
         <button
           type="button"
           className="btn btn-outline-secondary w-100"
@@ -64,6 +68,7 @@ function Filters({
     </div>
   );
 }
+
 
 /* ============ Campo tipo “papel” para el modal ============ */
 function PaperField({ label, value }){
